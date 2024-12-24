@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Chatbot Interface</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styling */
+        body {
+            background-color: #f4f4f4;
+        }
+
+        /* Chatbot Sidebar */
+        .chatbot-sidebar {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: 0;
+            background-color: #ffcd00;
+            overflow-x: hidden;
+            transition: width 0.3s ease;
+            box-shadow: -4px 0px 10px rgba(0, 0, 0, 0.2);
+            color: black;
+            z-index: 1050;
+        }
+
+        /* Sidebar Header */
+        .chatbot-header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        /* Sidebar Chat Body */
+        .chatbot-body {
+            padding: 1rem;
+            height: calc(100% - 120px);
+            overflow-y: auto;
+        }
+
+        .message {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            text-align: right;
+            margin-left: auto;
+        }
+
+        /* Input field */
+        .chatbot-input-area {
+            padding: 1rem;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .chatbot-input {
+            flex-grow: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .chatbot-send-btn {
+            margin-left: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Chatbot Icon */
+        .chatbot-logo {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #ffcd00;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1060;
+        }
+
+        .chatbot-logo:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .chatbot-sidebar {
+                width: 100%;
+                height: 50%;
+                bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Chatbot Sidebar -->
+    <div id="chatbotSidebar" class="chatbot-sidebar">
+        <div class="chatbot-header">
+            <h5>Chatbot</h5>
+            <button class="btn-close btn-close-white" aria-label="Close" onclick="toggleSidebar()"></button>
+        </div>
+        <div class="chatbot-body" id="chatbotBody">
+            <!-- Messages will be displayed here -->
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" id="chatbotInput" placeholder="Ask a question..." class="form-control chatbot-input">
+            <button class="btn chatbot-send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Chatbot Icon -->
+    <div id="chatbotIcon" class="chatbot-logo" onclick="toggleSidebar()">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to toggle the chatbot sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('chatbotSidebar');
+            const icon = document.getElementById('chatbotIcon');
+            if (sidebar.style.width === '300px' || sidebar.style.width === '100%') {
+                // Close sidebar
+                sidebar.style.width = '0';
+                icon.style.display = 'flex';
+            } else {
+                // Open sidebar
+                sidebar.style.width = window.innerWidth < 768 ? '100%' : '300px';
+                icon.style.display = 'none';
+            }
+        }
+
+        // Pre-defined responses
+        const responses = {
+            "hello": "Hello! How can I assist you today?",
+            "how are you?": "I'm just a bot, but thanks for asking!",
+            "what's your name?": "I'm your friendly chatbot!",
+            "bye": "Goodbye! Have a great day!"
+        };
+
+        // Function to send a message
+        function sendMessage() {
+            const inputField = document.getElementById('chatbotInput');
+            const userMessage = inputField.value.trim();
+
+            if (userMessage) {
+                displayMessage(userMessage, 'user-message');
+                inputField.value = '';
+
+                // Process the user message
+                const botResponse = responses[userMessage.toLowerCase()] || "I'm sorry, I didn't understand that.";
+                setTimeout(() => {
+                    displayMessage(botResponse, 'bot-message');
+                }, 500);
+            }
+        }
+
+        // Function to display messages
+        function displayMessage(text, className) {
+            const messageContainer = document.createElement('div');
+            messageContainer.className = `message ${className}`;
+            messageContainer.textContent = text;
+            document.getElementById('chatbotBody').appendChild(messageContainer);
+            messageContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
