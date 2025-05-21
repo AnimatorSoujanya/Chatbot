@@ -1,14 +1,12 @@
-#  💪 Responsive Gym Website Design
-## [Watch it on youtube](https://youtu.be/ddaY0rHqMxM)
-### 💪 Responsive Gym Website Design
 
-- Responsive Gym Website Design Using HTML CSS & JavaScript
-- Contains animations when scrolling.
-- Includes a form to calculate body mass index.
-- Includes a form to send emails.
-- Developed first with the Mobile First methodology, then for desktop.
-- Compatible with all mobile devices and with a beautiful and pleasant user interface.
+Welcome to our comprehensive tutorial on building a responsive clothing website from scratch using HTML, CSS, and JavaScript!
 
-💙 Join the channel to see more videos like this. [Bedimcode](https://www.youtube.com/c/Bedimcode)
 
-![preview img](/preview.png)
+<!-- responsive -->
+underdtanding units---
+px- it has a fixed value
+%- it doesnt have a fixed value ,like what a parent is given the child with % will always take the dimension with % in px it wll be fixed 
+vw- viewport width , wll take wdth accordngto full screen  and responsve
+vh- viewport height , will take heght accordng to the full screen heght and responsve
+vmax-vewpoet maximum
+vmin-viewport minimum

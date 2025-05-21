@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe Game | CodingNepal</title>
+   <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  background: #5372F0;
+}
+.select-box,
+.play-board,
+.result-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+.select-box {
+  background: #fff;
+  padding: 20px 25px 25px;
+  border-radius: 5px;
+  max-width: 400px;
+  width: 100%;
+}
+.select-box.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.select-box header {
+  font-size: 30px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+.select-box .title {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 20px 0;
+}
+.select-box .options {
+  display: flex;
+  width: 100%;
+}
+.options button {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 0;
+  border: none;
+  background: #5372F0;
+  border-radius: 5px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.options button:hover,
+.btn button:hover {
+  background: #2c52ed;
+}
+.options button.playerX {
+  margin-right: 5px;
+}
+.options button.playerO {
+  margin-left: 5px;
+}
+.select-box .credit {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.select-box .credit a {
+  color: #5372F0;
+  text-decoration: none;
+}
+.select-box .credit a:hover {
+  text-decoration: underline;
+}
+.play-board {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
+}
+.play-board.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+.play-board .details {
+  padding: 7px;
+  border-radius: 5px;
+  background: #fff;
+}
+.play-board .players {
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+}
+.players span {
+  position: relative;
+  z-index: 2;
+  color: #5372F0;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+  cursor: default;
+  user-select: none;
+  transition: all 0.3 ease;
+}
+.players.active span:first-child {
+  color: #fff;
+}
+.players.active span:last-child {
+  color: #5372F0;
+}
+.players span:first-child {
+  color: #fff;
+}
+.players .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: #5372F0;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.players.active .slider {
+  left: 50%;
+}
+.players.active span:first-child {
+  color: #5372F0;
+}
+.players.active span:nth-child(2) {
+  color: #fff;
+}
+.players.active .slider {
+  left: 50%;
+}
+.play-area {
+  margin-top: 20px;
+}
+.play-area section {
+  display: flex;
+  margin-bottom: 1px;
+}
+.play-area section span {
+  display: block;
+  height: 90px;
+  width: 90px;
+  margin: 2px;
+  color: #5372F0;
+  font-size: 40px;
+  line-height: 80px;
+  text-align: center;
+  border-radius: 5px;
+  background: #fff;
+}
+.result-box {
+  padding: 25px 20px;
+  border-radius: 5px;
+  max-width: 400px;
+  width: 100%;
+  opacity: 0;
+  text-align: center;
+  background: #fff;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
+}
+.result-box.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+.result-box .won-text {
+  font-size: 30px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+}
+.result-box .won-text p {
+  font-weight: 600;
+  margin: 0 5px;
+}
+.result-box .btn {
+  width: 100%;
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+.btn button {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border: none;
+  background: #5372F0;
+  border-radius: 5px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+   </style>
+    <!-- Linking Font Awesome For Icons (X and O) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+  <!-- select box -->
+  <div class="select-box">
+    <header>Tic Tac Toe</header>
+    <div class="content">
+      <div class="title">Select which you want to be?</div>
+      <div class="options">
+        <button class="playerX">Player (X)</button>
+        <button class="playerO">Player (O)</button>
+      </div>
+    </div>
+  </div> 
+  <!-- playboard section -->
+  <div class="play-board">
+    <div class="details">
+      <div class="players">
+        <span class="Xturn">X's Turn</span>
+        <span class="Oturn">O's Turn</span>
+        <div class="slider"></div>
+      </div>
+    </div>
+    <div class="play-area">
+      <section>
+        <span class="box1"></span>
+        <span class="box2"></span>
+        <span class="box3"></span>
+      </section>
+      <section>
+        <span class="box4"></span>
+        <span class="box5"></span>
+        <span class="box6"></span>
+      </section>
+      <section>
+        <span class="box7"></span>
+        <span class="box8"></span>
+        <span class="box9"></span>
+      </section>
+    </div>
+  </div>
+  <!-- result box -->
+  <div class="result-box">
+    <div class="won-text"></div>
+    <div class="btn"><button>Replay</button></div>
+  </div>
+  <script>
+    // Select all required elements
+const selectBox = document.querySelector(".select-box"),
+    selectBtnX = selectBox.querySelector(".options .playerX"),
+    selectBtnO = selectBox.querySelector(".options .playerO"),
+    playBoard = document.querySelector(".play-board"),
+    players = document.querySelector(".players"),
+    allBox = document.querySelectorAll("section span"),
+    resultBox = document.querySelector(".result-box"),
+    wonText = resultBox.querySelector(".won-text"),
+    replayBtn = resultBox.querySelector("button");
+// Variables for game state
+let playerXIcon = "fas fa-times"; // FontAwesome icon class for 'X'
+let playerOIcon = "far fa-circle"; // FontAwesome icon class for 'O'
+let playerSign = "X";
+let runBot = true;
+// Initialize the game
+window.onload = () => {
+    // Add click event to all boxes
+    allBox.forEach(box => {
+        box.addEventListener("click", () => clickedBox(box));
+    });
+};
+// Player X selection
+selectBtnX.onclick = () => {
+    selectBox.classList.add("hide");
+    playBoard.classList.add("show");
+};
+// Player O selection
+selectBtnO.onclick = () => {
+    selectBox.classList.add("hide");
+    playBoard.classList.add("show");
+    players.classList.add("active", "player");
+};
+// Handle user click
+function clickedBox(element) {
+    if (players.classList.contains("player")) {
+        playerSign = "O"; // Set sign to 'O' if player selected 'O'
+        element.innerHTML = `<i class="${playerOIcon}"></i>`; // Add 'O' icon
+        players.classList.remove("active"); // Switch active player
+    } else {
+        element.innerHTML = `<i class="${playerXIcon}"></i>`; // Add 'X' icon
+        players.classList.add("active");
+    }
+    element.setAttribute("id", playerSign); // Set ID to player sign
+    element.style.pointerEvents = "none"; 
+    playBoard.style.pointerEvents = "none";
+    selectWinner(); // Check for a winner
+    // Random delay for bot's move
+    const randomTimeDelay = Math.floor(Math.random() * 1000) + 200;
+    setTimeout(() => {
+        bot();
+    }, randomTimeDelay);
+}
+// Bot's move
+function bot() {
+    if (runBot) {
+        const availableBoxes = [...allBox].filter(box => !box.childElementCount); // Get available boxes
+        const randomBox = availableBoxes[Math.floor(Math.random() * availableBoxes.length)]; // Pick a random box
+        if (randomBox) {
+            if (players.classList.contains("player")) {
+                playerSign = "X"; // Bot plays 'X' if player chose 'O'
+                randomBox.innerHTML = `<i class="${playerXIcon}"></i>`;
+                players.classList.add("active");
+            } else {
+                playerSign = "O"; // Bot plays 'O' if player chose 'X'
+                randomBox.innerHTML = `<i class="${playerOIcon}"></i>`;
+                players.classList.remove("active");
+            }
+            randomBox.setAttribute("id", playerSign);
+            randomBox.style.pointerEvents = "none";
+            selectWinner(); // Check for a winner
+            playBoard.style.pointerEvents = "auto";
+            playerSign = "X"; // Reset to player's sign
+        }
+    }
+}
+// Get the ID of a box
+function getIdVal(classname) {
+    return document.querySelector(".box" + classname).id;
+}
+// Check if a winning combination is met
+function checkIdSign(val1, val2, val3, sign) {
+    return getIdVal(val1) === sign && getIdVal(val2) === sign && getIdVal(val3) === sign;
+}
+// Determine the winner
+function selectWinner() {
+    const winningCombinations = [
+        [1, 2, 3], [4, 5, 6], [7, 8, 9],
+        [1, 4, 7], [2, 5, 8], [3, 6, 9],
+        [1, 5, 9], [3, 5, 7]
+    ];
+    const isWinner = winningCombinations.some(combination => checkIdSign(...combination, playerSign));
+    if (isWinner) {
+        runBot = false; // Stop the bot
+        setTimeout(() => {
+            resultBox.classList.add("show");
+            playBoard.classList.remove("show");
+            wonText.innerHTML = `Player <p>${playerSign}</p> won the game!`;
+        }, 700);
+    } else if ([...allBox].every(box => box.id)) { // Check for a draw
+        runBot = false;
+        setTimeout(() => {
+            resultBox.classList.add("show");
+            playBoard.classList.remove("show");
+            wonText.textContent = "Match has been drawn!";
+        }, 700);
+    }
+}
+// Replay button click event
+replayBtn.onclick = () => {
+    window.location.reload(); // Reload the page
+};
+  </script>
+</body>
+</html>

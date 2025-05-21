@@ -1,0 +1,176 @@
+========== HEADER ==========
+.logo
+Gymmort
+
+.nav-link
+Home
+Choose Us
+Program
+Pricing
+
+.nav-button
+Register Now
+
+
+========== HOME ==========
+.home-subtitle
+Keep Your
+
+.home-title
+Body Fit & Strong
+
+.home-description
+In here we will help you to shape and build your ideal body and live your life to the fullest.
+
+.button
+Get Started
+
+
+========== CHOOSE US ==========
+.choose-timing-title
+Opening Hours
+
+.choose-time
+08:00 AM - 10:00 PM
+
+.section-subtitle
+Best Reason
+
+.section-title
+Why Choose Us ?
+
+.choose-description
+Choose your favorite class and start now. Remember the only bad workout is the one you didn't do.
+
+.choose-number | .choose-subtitle
+200+
+Total Members
+
+50+
+Best Trainers
+
+25+
+Programs
+
+100+
+Awards
+
+
+========== PROGRAM ==========
+.section-subtitle
+Our Program
+
+.section-title
+Build Your Best Body
+
+.program-number | .program-title | .program-description
+01
+Flex Muscle
+Creating tension that's temporarily making the muscle 
+fibers smaller or contracted.
+
+02
+Basic Yoga
+Diaphragmatic this is the most common breathing 
+technique you'll find in yoga.
+
+03
+Weight Lifting
+Attempts a maximum weight single lift of a 
+barbell loaded with weight plates.
+
+
+========== PRICING ==========
+.section-subtitle
+Pricing
+
+.section-title
+Our Special Plan
+
+.pricing-title | .pricing-number
+Starter
+$120
+
+Popular
+$240
+
+Advance
+$420
+
+.pricing-item
+1 Week Access
+24/7 Gym Access
+Personal Trainer
+Nutrition Plan
+Diet Planning
+Weekly Events
+
+1 Month Access
+Daily Events
+
+3 Month Access
+
+.pricing-button
+Purchase Now
+
+
+========== CALCULATE  ==========
+.section-subtitle
+BMI Calculator
+
+.section-title
+Calculate Your BMI
+
+.calculate__description
+The body mass index (BMI) calculator calculates body mass index from your weight and height.
+
+.button
+Calculate Now
+
+
+========== MARQUEE  ==========
+Live Classes
+On-Demand Workouts
+Personal Trainers
+Outdoor & Online Trainers
+
+
+========== FOOTER ==========
+.footer-description
+Subscribe for company updates below.
+
+.button
+Subscribe
+
+.footer-title | .footer-link
+Services
+Flex Muscle
+Basic Yoga
+Weight Lifting
+
+Pricing
+Basic
+Premium
+Diamond
+
+Company
+About Us
+Careers
+Customers
+Partners
+
+.footer-copy
+&#169; Copyright Gymmort. All rights reserved
+
+.footer-social-link
+https://www.facebook.com/
+https://twitter.com/
+https://www.instagram.com/
+
+
+* CALCULATE JS *
+Fill in the Height and Weight 👨‍💻
+
+Your BMI is - and you are skinny 😔
+Your BMI is - and you are healthy 👌
+Your BMI is - and you are overweight 😔
